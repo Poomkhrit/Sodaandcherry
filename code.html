@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Dress Up Game</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .game-container, .main-menu {
+            text-align: center;
+            width: 100%;
+        }
+
+        .main-menu {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .main-menu img {
+            width: 500px;
+            height: auto;
+        }
+
+        .main-menu button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            background-color: #6200ea;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .main-menu button:hover {
+            background-color: #3700b3;
+        }
+
+        .game-container {
+            display: none;
+        }
+
+        .base-container {
+            position: relative;
+            width: 500px;
+            height: 700px; /* Adjust height if needed */
+            margin: 20px auto 0 auto;
+        }
+
+        .base-container img {
+            width: 500px; /* Set base size */
+            height: auto;
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        .controls {
+            margin-top: 500px; /* Adjust margin to ensure buttons appear below the character image */
+        }
+
+        .category {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .category .soda, .category .cherry {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 45%;
+        }
+
+        .category img {
+            width: 100px;
+            height: auto;
+            margin: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 5px;
+        }
+
+        .category img:hover {
+            border-color: #3700b3;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="main-menu">
+        <img src="Mainscreen.png" alt="Main Menu Image">
+        <button onclick="enterGame()">Play</button>
+    </div>
+    <div class="game-container">
+        <div class="base-container">
+            <img id="base-image" src="Base.png" alt="Base Image">
+            <img id="soda-underwear-image" src="Sodaunderwear.png" alt="Soda Underwear" style="visibility: hidden;">
+            <img id="soda-underwear2-image" src="Soda underwear 2.png" alt="Soda Underwear 2" style="visibility: hidden;">
+            <img id="cherry-underwear-image" src="Cherryunderwear.png" alt="Cherry Underwear" style="visibility: hidden;">
+            <img id="cherry-underwear2-image" src="Cherryunderwear2.png" alt="Cherry Underwear 2" style="visibility: hidden;">
+            <img id="soda-bodysuit-image" src="Sodabodysuit.png" alt="Soda Bodysuit" style="visibility: hidden;">
+            <img id="soda-bodysuit2-image" src="Sodabodysuit2.png" alt="Soda Bodysuit 2" style="visibility: hidden;">
+            <img id="cherry-bodysuit-image" src="Cherrypajamas2.png" alt="Cherry Bodysuit" style="visibility: hidden;">
+            <img id="cherry-bodysuit2-image" src="Cherrybodysuit2.png" alt="Cherry Bodysuit 2" style="visibility: hidden;">
+            <img id="soda-top-image" src="Sodatop.png" alt="Soda Top" style="visibility: hidden;">
+            <img id="soda-top2-image" src="Sodapajama.png" alt="Soda Top 2" style="visibility: hidden;">
+            <img id="cherry-top-image" src="Cherrytop.png" alt="Cherry Top" style="visibility: hidden;">
+            <img id="cherry-top2-image" src="Cherrypajamas.png" alt="Cherry Top 2" style="visibility: hidden;">
+            <img id="soda-bottom-image" src="Sodabottom.png" alt="Soda Bottom" style="visibility: hidden;">
+            <img id="soda-bottom2-image" src="Sodabottom 2.png" alt="Soda Bottom 2" style="visibility: hidden;">
+            <img id="soda-bottom3-image" src="Sodapantspajamas.png" alt="Soda Pants Pajamas" style="visibility: hidden;">
+            <img id="cherry-bottom-image" src="Cherrybottom.png" alt="Cherry Bottom" style="visibility: hidden;">
+            <img id="cherry-bottom2-image" src="Cherrybottom 2.png" alt="Cherry Bottom 2" style="visibility: hidden;">
+            <img id="cherry-bottom3-image" src="Cherrypantspajamas.png" alt="Cherry Pants Pajamas" style="visibility: hidden;">
+            <img id="soda-shoes-image" src="Sodashoes.png" alt="Soda Shoes" style="visibility: hidden;">
+            <img id="soda-shoes2-image" src="Sodashoes2.png" alt="Soda Shoes 2" style="visibility: hidden;">
+            <img id="cherry-shoes-image" src="Cherryshoes.png" alt="Cherry Shoes" style="visibility: hidden;">
+            <img id="cherry-shoes2-image" src="Cherryshoes2.png" alt="Cherry Shoes 2" style="visibility: hidden;">
+        </div>
+        <div class="controls">
+            <div class="category">
+                <div class="soda">
+                    <h3>Soda Underwear</h3>
+                    <img src="Sodaunderwear.png" alt="Soda Underwear" onclick="toggleUnderwear('soda-underwear-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                    <img src="Soda underwear 2.png" alt="Soda Underwear 2" onclick="toggleUnderwear('soda-underwear2-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                </div>
+                <div class="cherry">
+                    <h3>Cherry Underwear</h3>
+                    <img src="Cherryunderwear.png" alt="Cherry Underwear" onclick="toggleUnderwear('cherry-underwear-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                    <img src="Cherryunderwear2.png" alt="Cherry Underwear 2" onclick="toggleUnderwear('cherry-underwear2-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                </div>
+            </div>
+            <div class="category">
+                <div class="s                <div class="category">
+                    <div class="soda">
+                        <h3>Soda Bodysuit</h3>
+                        <img src="Sodabodysuit.png" alt="Soda Bodysuit" onclick="toggleBodySuit('soda-bodysuit-image', 'soda-underwear-image', ['soda-top-image', 'soda-bottom-image', 'soda-bottom2-image', 'soda-bottom3-image'])">
+                        <img src="Sodabodysuit2.png" alt="Soda Bodysuit 2" onclick="toggleBodySuit('soda-bodysuit2-image', 'soda-underwear2-image', ['soda-top-image', 'soda-bottom-image', 'soda-bottom2-image', 'soda-bottom3-image'])">
+                    </div>
+                    <div class="cherry">
+                        <h3>Cherry Bodysuit</h3>
+                        <img src="Cherrypajamas2.png" alt="Cherry Bodysuit" onclick="toggleBodySuit('cherry-bodysuit-image', 'cherry-underwear-image', ['cherry-top-image', 'cherry-bottom-image', 'cherry-bottom2-image', 'cherry-bottom3-image'])">
+                        <img src="Cherrybodysuit2.png" alt="Cherry Bodysuit 2" onclick="toggleBodySuit('cherry-bodysuit2-image', 'cherry-underwear2-image', ['cherry-top-image', 'cherry-bottom-image', 'cherry-bottom2-image', 'cherry-bottom3-image'])">
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="soda">
+                        <h3>Soda Tops</h3>
+                        <img src="Sodatop.png" alt="Soda Top" onclick="toggleTopOrBottom('soda-top-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                        <img src="Sodapajama.png" alt="Soda Top 2" onclick="toggleTopOrBottom('soda-top2-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                    </div>
+                    <div class="cherry">
+                        <h3>Cherry Tops</h3>
+                        <img src="Cherrytop.png" alt="Cherry Top" onclick="toggleTopOrBottom('cherry-top-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                        <img src="Cherrypajamas.png" alt="Cherry Top 2" onclick="toggleTopOrBottom('cherry-top2-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="soda">
+                        <h3>Soda Bottoms</h3>
+                        <img src="Sodabottom.png" alt="Soda Bottom" onclick="toggleTopOrBottom('soda-bottom-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                        <img src="Sodabottom 2.png" alt="Soda Bottom 2" onclick="toggleTopOrBottom('soda-bottom2-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                        <img src="Sodapantspajamas.png" alt="Soda Pants Pajamas" onclick="toggleTopOrBottom('soda-bottom3-image', ['soda-bodysuit-image', 'soda-bodysuit2-image'])">
+                    </div>
+                    <div class="cherry">
+                        <h3>Cherry Bottoms</h3>
+                        <img src="Cherrybottom.png" alt="Cherry Bottom" onclick="toggleTopOrBottom('cherry-bottom-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                        <img src="Cherrybottom 2.png" alt="Cherry Bottom 2" onclick="toggleTopOrBottom('cherry-bottom2-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                        <img src="Cherrypantspajamas.png" alt="Cherry Pants Pajamas" onclick="toggleTopOrBottom('cherry-bottom3-image', ['cherry-bodysuit-image', 'cherry-bodysuit2-image'])">
+                    </div>
+                </div>
+                <div class="category">
+                    <div class="soda">
+                        <h3>Soda Shoes</h3>
+                        <img src="Sodashoes.png" alt="Soda Shoes" onclick="toggleClothing('soda-shoes-image')">
+                        <img src="Sodashoes2.png" alt="Soda Shoes 2" onclick="toggleClothing('soda-shoes2-image')">
+                    </div>
+                    <div class="cherry">
+                        <h3>Cherry Shoes</h3>
+                        <img src="Cherryshoes.png" alt="Cherry Shoes" onclick="toggleClothing('cherry-shoes-image')">
+                        <img src="Cherryshoes2.png" alt="Cherry Shoes 2" onclick="toggleClothing('cherry-shoes2-image')">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function enterGame() {
+            document.querySelector('.main-menu').style.display = 'none';
+            document.querySelector('.game-container').style.display = 'block';
+        }
+
+        // Function to toggle underwear and hide body suit
+        function toggleUnderwear(underwearId, bodySuitIds) {
+            const underwearImage = document.getElementById(underwearId);
+            
+            // Toggle underwear visibility
+            underwearImage.style.visibility = underwearImage.style.visibility === 'visible' ? 'hidden' : 'visible';
+            
+            // Hide all body suits when the underwear is visible
+            if (underwearImage.style.visibility === 'visible') {
+                bodySuitIds.forEach(bodySuitId => {
+                    document.getElementById(bodySuitId).style.visibility = 'hidden';
+                });
+            }
+        }
+
+        // Function to toggle body suit, hide underwear, top, and bottom
+        function toggleBodySuit(bodySuitId, underwearId, topBottomIds) {
+            const bodySuitImage = document.getElementById(bodySuitId);
+            const underwearImage = document.getElementById(underwearId);
+            
+            // Toggle body suit visibility
+            bodySuitImage.style.visibility = bodySuitImage.style.visibility === 'visible' ? 'hidden' : 'visible';
+            
+            // Hide the underwear when the body suit is visible
+            if (bodySuitImage.style.visibility === 'visible') {
+                underwearImage.style.visibility = 'hidden';
+                // Hide top and bottom as well
+                topBottomIds.forEach(id => {
+                    document.getElementById(id).style.visibility = 'hidden';
+                });
+            }
+        }
+
+        // Function to toggle top or bottom and hide body suit
+        function toggleTopOrBottom(itemId, bodySuitIds) {
+            const itemImage = document.getElementById(itemId);
+            
+            // Toggle top or bottom visibility
+            itemImage.style.visibility = itemImage.style.visibility === 'visible' ? 'hidden' : 'visible';
+            
+            // Hide all body suits when top or bottom is visible
+            if (itemImage.style.visibility === 'visible') {
+                bodySuitIds.forEach(bodySuitId => {
+                    document.getElementById(bodySuitId).style.visibility = 'hidden';
+                });
+            }
+        }
+
+        function toggleClothing(clothingId) {
+            const clothingImage = document.getElementById(clothingId);
+            clothingImage.style.visibility = clothingImage.style.visibility === 'visible' ? 'hidden' : 'visible';
+        }
+    </script>
+</body>
+</html>
